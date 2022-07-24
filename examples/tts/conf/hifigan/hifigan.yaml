@@ -4,11 +4,11 @@
 
 name: "HifiGan"
 
-train_dataset: ???
-validation_datasets: ???
+train_dataset: "/root/storage/dasha/data/emo-data/json/train_manifest.json"
+validation_datasets: "/root/storage/dasha/data/emo-data/json/test_manifest.json"
 
 # Default values for dataset with sample_rate=22050
-sample_rate: 22050
+sample_rate: 16000
 n_mel_channels: 80
 n_window_size: 1024
 n_window_stride: 256
@@ -70,30 +70,30 @@ model:
 
 trainer:
   num_nodes: 1
-  devices: 1
+  devices: 8
   accelerator: gpu
   strategy: ddp
   precision: 32
   max_steps: ${model.max_steps}
   accumulate_grad_batches: 1
-  enable_checkpointing: False  # Provided by exp_manager
+  enable_checkpointing: false  # Provided by exp_manager
   logger: false # Provided by exp_manager
-  log_every_n_steps: 100
-  check_val_every_n_epoch: 10
+  log_every_n_steps: 10000
+  check_val_every_n_epoch: 5000
   benchmark: false
 
 exp_manager:
   exp_dir: null
   name: ${name}
-  create_tensorboard_logger: true
+  create_tensorboard_logger: false
   create_checkpoint_callback: true
   checkpoint_callback_params:
     monitor: val_loss
     mode: min
-  create_wandb_logger: false
+  create_wandb_logger: true
   wandb_logger_kwargs:
     name: null
-    project: null
+    project: HiFiGanEmo
     entity: null
   resume_if_exists: false
   resume_ignore_no_checkpoint: false

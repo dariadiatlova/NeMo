@@ -8,6 +8,6 @@ dataset:
 dataloader_params:
   drop_last: false
   shuffle: false
-  batch_size: 16
+  batch_size: 128
   num_workers: 1
   pin_memory: true

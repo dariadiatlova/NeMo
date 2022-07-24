@@ -242,7 +242,7 @@ class HifiGanModel(Vocoder, Exportable):
         if batch_idx == 0 and isinstance(self.logger, WandbLogger) and HAVE_WANDB:
             clips = []
             specs = []
-            for i in range(min(5, audio.shape[0])):
+            for i in range(min(56, audio.shape[0])):
                 clips += [
                     wandb.Audio(
                         audio[i, : audio_len[i]].data.cpu().numpy(),
