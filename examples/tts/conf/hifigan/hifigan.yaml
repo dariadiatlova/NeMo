@@ -10,14 +10,14 @@ validation_datasets: "/root/storage/dasha/data/emo-data/json/test_manifest.json"
 # Default values for dataset with sample_rate=22050
 sample_rate: 16000
 n_mel_channels: 80
-n_window_size: 1024
-n_window_stride: 256
-n_fft: 1024
+n_window_size: 512
+n_window_stride: 128
+n_fft: 512
 lowfreq: 0
 highfreq: 8000
 window: hann
 
-train_n_segments: 8192
+train_n_segments: 4098
 train_max_duration: null
 train_min_duration: 0.75
 
@@ -70,7 +70,7 @@ model:
 
 trainer:
   num_nodes: 1
-  devices: 8
+  devices: 6
   accelerator: gpu
   strategy: ddp
   precision: 32
@@ -78,8 +78,8 @@ trainer:
   accumulate_grad_batches: 1
   enable_checkpointing: false  # Provided by exp_manager
   logger: false # Provided by exp_manager
-  log_every_n_steps: 10000
-  check_val_every_n_epoch: 5000
+  log_every_n_steps: 100
+  check_val_every_n_epoch: 2
   benchmark: false
 
 exp_manager:
@@ -93,7 +93,7 @@ exp_manager:
   create_wandb_logger: true
   wandb_logger_kwargs:
     name: null
-    project: HiFiGanEmo
+    project: HiFiGanEmoConv
     entity: null
   resume_if_exists: false
   resume_ignore_no_checkpoint: false
