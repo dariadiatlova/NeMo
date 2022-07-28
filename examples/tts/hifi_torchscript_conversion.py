@@ -1,7 +1,5 @@
 from nemo.collections.tts.models import HifiGanModel
-from nemo.collections.tts.modules.hifigan_modules import Generator
 from nemo.core.config import hydra_runner
-import torch
 
 
 @hydra_runner(config_path="conf/hifigan", config_name="hifigan")
