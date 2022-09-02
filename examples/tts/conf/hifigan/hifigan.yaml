@@ -3,9 +3,9 @@
 # Most dataset-specific arguments are in the head of the config file, see below.
 
 name: "HifiGan"
-
-train_dataset: "/root/storage/dasha/data/emo-data/json/train_manifest.json"
-validation_datasets: "/root/storage/dasha/data/emo-data/json/test_manifest.json"
+init_from_ptl_ckpt: "/root/storage/dasha/saved_models/hifi/HifiGan--val_loss=0.0584-epoch=6949.ckpt"
+train_dataset: "/root/storage/dasha/data/emo-data/english_esd/hifi/train_manifest.json"
+validation_datasets: "/root/storage/dasha/data/emo-data/english_esd/hifi/val_manifest.json"
 
 # Default values for dataset with sample_rate=22050
 sample_rate: 16000
@@ -17,11 +17,11 @@ lowfreq: 0
 highfreq: 8000
 window: hann
 
-train_n_segments: 4098
+train_n_segments: 4096
 train_max_duration: null
 train_min_duration: 0.75
 
-val_n_segments: 66048
+val_n_segments: 800000
 val_max_duration: null
 val_min_duration: 3
 
@@ -70,7 +70,7 @@ model:
 
 trainer:
   num_nodes: 1
-  devices: 6
+  devices: 4
   accelerator: gpu
   strategy: ddp
   precision: 32
@@ -79,7 +79,7 @@ trainer:
   enable_checkpointing: false  # Provided by exp_manager
   logger: false # Provided by exp_manager
   log_every_n_steps: 100
-  check_val_every_n_epoch: 2
+  check_val_every_n_epoch: 50
   benchmark: false
 
 exp_manager:
@@ -93,7 +93,7 @@ exp_manager:
   create_wandb_logger: true
   wandb_logger_kwargs:
     name: null
-    project: HiFiGanEmoConv
+    project: HiFiGanVCTK16K
     entity: null
   resume_if_exists: false
   resume_ignore_no_checkpoint: false

@@ -23,7 +23,7 @@ def main(wav_txt_dir_path: str, train_manifest_path: str, val_manifest_path: str
 
 
 if __name__ == "__main__":
-    wav_txt_dir_path = "/root/storage/dasha/data/vctk/wavs16vad"
-    train_manifest_path = "/root/storage/dasha/data/vctk/hifi16/train_manifest.json"
-    val_manifest_path = "/root/storage/dasha/data/vctk/hifi16/val_manifest.json"
+    wav_txt_dir_path = "/root/storage/dasha/data/vctk/librosa_vad_16"
+    train_manifest_path = "/root/storage/dasha/data/vctk/hifi16/train_manifest_librosa_vad.json"
+    val_manifest_path = "/root/storage/dasha/data/vctk/hifi16/val_manifest_librosa_vad.json"
     main(wav_txt_dir_path, train_manifest_path, val_manifest_path)
